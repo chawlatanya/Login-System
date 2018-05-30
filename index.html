@@ -1,0 +1,81 @@
+<?php
+
+if(isset($_POST['login']))
+	header("location:login1.html");
+if(isset($_POST['status']))
+	{	if(session_status()==PHP_SESSION_NONE)
+	{	
+		echo "<script> window.alert('Logged Out'); window.location.href='index.html';</script>";
+
+	}
+	if(session_status()==PHP_SESSION_ACTIVE)
+	{
+		echo "<script> window.alert('Logged In'); window.location.href='index.html';</script>";
+	}
+	}	
+	
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+		body{
+	background-color: #f1f5f7;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+.btn1{
+	float: right;
+    margin-right: 70px;
+    margin-top: 10px;
+    color:#FFF;
+}
+.btn{
+	margin-right:20px;
+}
+.btn1{
+	float: right;
+    margin-right: 70px;
+    margin-top: 10px;
+    color:#FFF;
+}
+.btn{
+	margin-right:20px;
+}
+.header{
+		height:450px;
+}
+.middle{
+	font-size: 40px;
+	margin:-20% 32%;
+	color: #3d5c5c;
+}
+
+</style>
+</head>
+<body>
+	<div class="header">
+		<div class="row">
+			<div class="btn1">
+			<form action="index.html" method="POST">
+			<input type="submit" class="btn btn-default" value="Log in" name="login">
+			<input type="submit" class="btn btn-default" name="status" value="Status">
+		    </form>
+		    </div>
+		</div>
+	</div>
+	<div class="middle">
+		Welcome to Login System
+	</div>
+
+
+</body>
+</html>

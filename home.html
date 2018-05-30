@@ -1,0 +1,135 @@
+<?php
+
+	session_start();
+	if(isset($_POST['log_out']))
+	{
+		
+		$_SESSION=array();
+		session_destroy();
+		header("location:login1.html");
+		
+	}	
+
+
+if(isset($_POST['status']))
+	{	if(session_status()==PHP_SESSION_NONE)
+	{	
+		echo "<script> window.alert('Logged Out'); window.location.href='home.html';</script>";
+
+	}
+	if(session_status()==PHP_SESSION_ACTIVE)
+	{
+		echo "<script> window.alert('Logged In'); window.location.href='home.html';</script>";
+	}
+	}	
+	
+	echo "<div style='margin-left:20%;'>
+	<span style='font-size:30px;text-align:center;'><br>Welcome ".$_SESSION['name']."</span><br><span style='font-size:30px;'>This is the home page.</span><br></div>";
+	
+	echo "<table>
+	<tr>
+		<th>Registration ID</th>
+		<th>Name</th>
+		<th>Email ID</th>
+		<th>Phone Number</th>
+	</tr>";
+	$con=mysqli_connect("localhost","root","") or die("Unable to connect");
+	mysqli_select_db($con,'test');
+	$result=mysqli_query($con,"SELECT * from registration");
+	while($row = mysqli_fetch_array($result,MYSQLI_ASSOC))
+	{
+		echo"<tr>";
+		echo"<td>". $row['Registration_Id'] ."</td>";
+		echo"<td>". $row['Name']. "</td>";
+		echo"<td>". $row['Email']. "</td>";
+		echo "<td>".$row['Phone_Number']."</td>";
+		echo "</tr>";
+	}
+	echo"</table>";
+	mysqli_close($con);			
+
+
+	
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<style>
+		body{
+	background-color: #f1f5f7;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+form{
+	margin-top: -250px;
+	float: right;		
+}
+.btn1{
+	float: right;
+    margin-right: 50px;
+    margin-top: -70px;
+    color:#FFF;
+}
+.btn{
+	margin-right:20px;
+}
+.header{
+		height:450px;
+}
+.middle{
+	font-size: 40px;
+	margin:-20% 32%;
+	color: #3d5c5c;
+
+}
+table,th,td{
+	border-radius: 1px;
+	border:1px solid black;
+	margin-top:3%;
+	margin-left:20%;
+	background-color: white;
+	
+}
+table{
+	border-collapse: collapse;
+	width:50%;
+	border-radius: 5px;
+}
+th{
+	height: 50px;
+	text-align: center;
+}
+
+td{
+	vertical-align: middle;
+	text-align: center;
+	height: 30px;
+}
+</style>
+</head>
+<body>
+	
+	<div class="header">
+		<div class="row">
+			<div class="btn1">
+			<form action="home.html" method="POST">
+			<input type="submit" class="btn btn-default" value="Log Out" name="log_out">
+			<input type="submit" class="btn btn-default" name="status" value="Status">
+		    </form>
+		    </div>
+		</div>
+	</div>
+	
+	
+
+
+</body>
+</html>
